@@ -178,7 +178,7 @@ class ChatGPTNode(Node):
         """
         # Log
         self.get_logger().info(f"Sending messages to OpenAI: {messages_input}")
-        response = openai.ChatCompletion.create(
+        response = openai.chat.completion.create(
             model=config.openai_model,
             messages=messages_input,
             functions=config.robot_functions_list,
@@ -203,9 +203,9 @@ class ChatGPTNode(Node):
         function_flag = 0: no function call, 1: function call
         """
         # Getting response information
-        message = chatgpt_response["choices"][0]["message"]
-        content = message.get("content")
-        function_call = message.get("function_call", None)
+        message = chatgpt_response.choices[0].message
+        content = message.content
+        function_call = message.function_call
 
         # Initializing function flag, 0: no function call, 1: function call
         function_flag = 0

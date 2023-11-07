@@ -84,7 +84,8 @@ class UserConfig:
         # [optional]: The chat history, including the user prompt, system prompt, and assistant response
         self.chat_history = [{"role": "system", "content": self.system_prompt}]
         # [optional]: The path to the chat history JSON file
-        self.chat_history_path = os.path.expanduser("~")
+        # self.chat_history_path = os.path.expanduser("~")
+        self.chat_history_path = /home/user/workspace/src/my_source_code
         # self.chat_history_path = os.path.dirname(os.path.abspath(__file__))
         # [optional]: The limit of the chat history length
         self.chat_history_max_length = 4000
@@ -115,7 +116,7 @@ class UserConfig:
 
         # OpenAI Whisper Model size related
         # [optional]: OpenAI Whisper Model size: tiny base small medium large
-        self.whisper_model_size = "medium"
+        self.whisper_model_size = "base"
         # [optional]: OpenAI Whisper Model language: en
         self.whisper_language="en"
         # Audio recording related

@@ -46,7 +46,7 @@ config = UserConfig()
 
 class AudioInput(Node):
     def __init__(self):
-        super().__init__("llm_audio_input")
+        super().__init__("llm_audio_input_local")
         # tmp audio file
         self.tmp_audio_file = "/tmp/user_audio_input.flac"
 

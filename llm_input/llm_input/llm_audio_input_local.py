@@ -79,6 +79,7 @@ class AudioInput(Node):
         duration = config.duration  # Audio recording duration, in seconds
         sample_rate = config.sample_rate  # Sample rate
         volume_gain_multiplier = config.volume_gain_multiplier  # Volume gain multiplier
+        device = config.device
 
         # Step 1: Record audio
         self.get_logger().info("Start local recording...")

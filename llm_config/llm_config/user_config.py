@@ -85,7 +85,7 @@ class UserConfig:
         self.chat_history = [{"role": "system", "content": self.system_prompt}]
         # [optional]: The path to the chat history JSON file
         # self.chat_history_path = os.path.expanduser("~")
-        self.chat_history_path = /home/user/workspace/src/my_source_code
+        self.chat_history_path = "/home/user/workspace/src/my_source_code"
         # self.chat_history_path = os.path.dirname(os.path.abspath(__file__))
         # [optional]: The limit of the chat history length
         self.chat_history_max_length = 4000

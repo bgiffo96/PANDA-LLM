@@ -123,7 +123,7 @@ class UserConfig:
         # [optional]: Audio recording duration, in seconds
         self.duration = 5
         # [optional]: Audio recording sample rate, in Hz
-        self.sample_rate = 48000
+        self.sample_rate = 16000
         # [optional]: Audio recording gain multiplier
         # Change this to increase or decrease the volume
         self.volume_gain_multiplier = 1

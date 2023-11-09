@@ -178,7 +178,7 @@ class ChatGPTNode(Node):
         """
         # Log
         self.get_logger().info(f"Sending messages to OpenAI: {messages_input}")
-        response = openai.chat.completion.create(
+        response = openai.chat.completions.create(
             model=config.openai_model,
             messages=messages_input,
             functions=config.robot_functions_list,

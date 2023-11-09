@@ -127,3 +127,5 @@ class UserConfig:
         # [optional]: Audio recording gain multiplier
         # Change this to increase or decrease the volume
         self.volume_gain_multiplier = 1
+        # input device number, chosen when running sounddevice.query_devices()
+        self.device = 11

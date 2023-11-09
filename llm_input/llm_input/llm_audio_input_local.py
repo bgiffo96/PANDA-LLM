@@ -90,6 +90,10 @@ class AudioInput(Node):
         # Step 2: Increase the volume by a multiplier
         audio_data *= volume_gain_multiplier
 
+        # test - save to file
+        file_location = '/home/user/workspace/src/my_source_code/recorded_audio.wav'
+        wav.write(file_location, sample_rate, audio_data)
+
         # Step 3: Save audio to file
         write(self.tmp_audio_file, sample_rate, audio_data)
         self.get_logger().info("Stop local recording!")
@@ -99,6 +103,7 @@ class AudioInput(Node):
 
         # Step 4: Process audio with OpenAI Whisper
         whisper_model = whisper.load_model(config.whisper_model_size)
+        self.get_logger().info(whisper_model)
 
         # Step 6: Wait until the conversion is complete
         self.get_logger().info("Local Converting...")

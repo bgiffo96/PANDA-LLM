@@ -93,7 +93,7 @@ class AudioInput(Node):
 
         # test - save to file
         file_location = '/home/user/workspace/src/my_source_code/recorded_audio.wav'
-        wav.write(file_location, sample_rate, audio_data)
+        write(file_location, sample_rate, audio_data)
 
         # Step 3: Save audio to file
         write(self.tmp_audio_file, sample_rate, audio_data)

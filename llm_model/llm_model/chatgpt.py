@@ -47,6 +47,7 @@ import time
 import openai
 from llm_config.user_config import UserConfig
 
+from icecream import ic
 
 # Global Initialization
 config = UserConfig()
@@ -88,12 +89,12 @@ class ChatGPTNode(Node):
         self.function_call_client = self.create_client(
             ChatGPT, "/ChatGPT_function_call_service"
         )
-        # self.function_call_future = None
+        self.function_call_future = None
         # Wait for function call server to be ready
-        # while not self.function_call_client.wait_for_service(timeout_sec=1.0):
-        #     self.get_logger().info(
-        #         "ChatGPT Function Call Server(ROBOT NODE) not available, waiting again..."
-        #     )
+        while not self.function_call_client.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info(
+                "ChatGPT Function Call Server(ROBOT NODE) not available, waiting again..."
+            )
         self.function_call_requst = ChatGPT.Request()  # Function call request
         self.get_logger().info("ChatGPT Function Call Server is ready")
 
@@ -156,6 +157,8 @@ class ChatGPTNode(Node):
             message_element_object["name"] = name
         # Adding function call information if provided
         if function_call is not None:
+            # self.get_logger().info(f"Function call: {function_call}")
+            # self.get_logger().info(f"Function call dict: {function_call.__dict__}")
             message_element_object["function_call"] = function_call
         # Adding message_element_object to chat history
         config.chat_history.append(message_element_object)
@@ -205,8 +208,12 @@ class ChatGPTNode(Node):
         # Getting response information
         message = chatgpt_response.choices[0].message
         content = message.content
-        function_call = message.function_call
-
+        if message.function_call is not None:
+            function_call = message.function_call.__dict__
+        else:
+            function_call = message.function_call
+        ic(function_call)
+        
         # Initializing function flag, 0: no function call, 1: function call
         function_flag = 0
 
@@ -236,8 +243,15 @@ class ChatGPTNode(Node):
         Write the chat history to a JSON file.
         """
         try:
+            
             # Converting chat history to JSON string
+            self.get_logger().info(f"Chat history: {config.chat_history}")
+            
             json_data = json.dumps(config.chat_history)
+            # try: 
+            #     json_data = json.dumps(config.chat_history)
+            # except: 
+            #     json_data = convert_to_serializable(config.chat_history)
 
             # Writing JSON to file
             with open(self.chat_history_file, "w", encoding="utf-8") as file:

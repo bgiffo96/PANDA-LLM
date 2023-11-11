@@ -123,9 +123,9 @@ class UserConfig:
         # [optional]: Audio recording duration, in seconds
         self.duration = 5
         # [optional]: Audio recording sample rate, in Hz
-        self.sample_rate = 16000
+        self.sample_rate = 48000
         # [optional]: Audio recording gain multiplier
         # Change this to increase or decrease the volume
         self.volume_gain_multiplier = 1
         # input device number, chosen when running sounddevice.query_devices()
-        self.device = 11
+        self.input_device = "USB PnP Audio Device: Audio"

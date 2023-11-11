@@ -104,7 +104,6 @@ class AudioInput(Node):
 
         # Step 4: Process audio with OpenAI Whisper
         whisper_model = whisper.load_model(config.whisper_model_size)
-        self.get_logger().info(whisper_model)
 
         # Step 6: Wait until the conversion is complete
         self.get_logger().info("Local Converting...")

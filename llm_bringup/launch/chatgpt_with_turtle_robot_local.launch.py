@@ -47,11 +47,11 @@ def generate_launch_description():
                 name="chatgpt",
                 output="screen",
             ),
-            Node(
-                package="llm_output",
-                executable="llm_audio_output",
-                name="llm_audio_output",
-                output="screen",
+            # Node(
+            #     package="llm_output",
+            #     executable="llm_audio_output",
+            #     name="llm_audio_output",
+            #     output="screen",
             ),
             Node(
                 package="llm_robot",

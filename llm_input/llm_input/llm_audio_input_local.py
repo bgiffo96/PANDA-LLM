@@ -41,6 +41,8 @@ from std_msgs.msg import String
 # Global Initialization
 from llm_config.user_config import UserConfig
 
+from icecream import ic
+
 config = UserConfig()
 
 
@@ -79,12 +81,12 @@ class AudioInput(Node):
         duration = config.duration  # Audio recording duration, in seconds
         sample_rate = config.sample_rate  # Sample rate
         volume_gain_multiplier = config.volume_gain_multiplier  # Volume gain multiplier
-        device = config.device
+        input_device = config.input_device
 
         # Step 1: Record audio
         self.get_logger().info("Start local recording...")
         audio_data = sd.rec(
-            int(duration * sample_rate), samplerate=sample_rate, channels=1
+            int(duration * sample_rate), samplerate=sample_rate, channels=1, device = input_device
         )
         sd.wait()  # Wait until recording is finished
 

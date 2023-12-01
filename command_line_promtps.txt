@@ -1,0 +1,31 @@
+
+to build a new docker contianer from the docer file use:
+    docker build -t ros_llm_docker .
+        docker build -t ()
+        ros_llm_docker (name of container)
+        . (directory of docker file)
+
+to run the docker container use:
+    docker run -it -e DISPLAY=$DISPLAY --network=host --ipc=host --user root -v $PWD/cross_platform/code:/home/user/workspace/src/my_source_code ros_llm_docker
+        docker run -it (opens in terminal)
+        -e (sets environment virables), DISPLAY=$DISPLAY sets the container display as the PC's constant $DISPLAY
+        --netowrk=host (shares the host PC network settings)
+        -- user <user> (sets the user level, either use root or non_root)
+        -v <absolute_source_path_on_host>:<absolute_source_path_in_docker> (sets up a shared drive, i.e. bind mount)
+        ros_llm_docker (container name)
+
+To access the container from another terminal session:
+     docker exec -it docker_container /bin/bash
+
+        
+        
+        
+To run the ROS_LLM script without Run launch file 
+
+In another terminal session run the follow command:
+	ros2 topic pub /llm_input_audio_to_text std_msgs/msg/String "data: 'move the turtle forwards'" -1
+	ros2 topic pub /llm_input_audio_to_text std_msgs/msg/String "data: 'rotate the turtle 90 degree left'" -1
+	ros2 topic pub /llm_input_audio_to_text std_msgs/msg/String "data: 'rotate the turtle 180 degree right and move forwards'" -1
+	ros2 topic pub /llm_input_audio_to_text std_msgs/msg/String "data: 'move the turtle forwards for 4 seconds'" -1
+	ros2 topic pub /llm_input_audio_to_text std_msgs/msg/String "data: 'move the turtle forwards 4'" -1
+	

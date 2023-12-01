@@ -1,0 +1,56 @@
+
+
+
+
+
+ACTIONS:
+remove the --privilege from the docker run file so that it more accurately target the microphone input. 
+
+
+ISSUES AND FIXES:
+	1) Issue - needing to do the following each time I made a new container:
+		Steps to get the code running:
+			run docker run file
+			change launch file
+			change llm_audio_input_local.py so that the node name matchs 
+			change llm_model\chatgpt.py to that it matches latest openai documentation, i.e. changing ChatCompletion to chat.completion
+			change user_config.py to use the "base" version of whisper_model_size to speed up processing for now
+	1) Fix - created a github fork of the code and edited it, then build the docker container from the new updated git repo
+	
+	2) Issue - model takes a long time to process the input
+	2) Fix - changing to a smaller whisper model shoudl help. 
+	
+	2.1) Issue - Small model output not great
+	2.1) Fix - Using a bigger model. 
+	
+	3) Issue - build time currently takes 555.5 seconds
+	3) Fix - ? ask adam again, really do need to understand a better workflow for this
+	
+	4) Issue - docker not building from scrtach 
+	4) Fix - docker build --no-cache
+	
+	5) Issue - OpenAI documentation wrong on how to access the data within the class of ChatCompletion.
+	5) Fix - troublshooting and found the issues was due to how we access the inforamtion in the class.
+	
+	6) Issue - microphone input not working, sample rate error
+	6) fix - wrote a script that will run through a list of differetn sample rates and stop when it finds one that works, samplerate_test.py
+	
+	7) Issue - problem with message published always being "you"
+	7) fix - the issues was that the selected input device was wrogn when using the standard input device. Checked devices using sounddevice.query.devices()
+	
+	8) Issue - json.dumpy(config.chat_history) couldn't covnert FunctionCall to JSON as it wasnt serialisable. 
+	8) Fix - Found the source where the funcation call was parsed and implemented ".__dict__" to force it to a dict type not a class type. This 		change to the souce parser fixed all instances of json.dumpy. 
+	
+	9) Issue - .bashrc not having the echoed lines from the docker file. 
+	9) Fix - the container was being ran as a non root user, and so the .bashrc file was different 
+	
+	10) Issue - icecream not installing, pip install not working in the docker file 
+	10) Fix - pip wasnt working as the base image i am using "FROM osrf/ros:humble-desktop-full" doesnt come with python and pip pre-installed, these were being attained from the git repo futher down. The solution was the add python and pip to the installs list before trying to RUN pip install icecream.
+	
+	11) Issue - the duration on the turtle command doesnt seem to be having any effect
+
+
+LESSONS LEARNT: 
+	1) add point about IMP and AI policy over doing it, shouldn't have had to spend so long following the full procedure for in insternal IMP. There should be a lighter touch approach for internal only project. 
+ 	2) AI policy makes the project less flexible to changes. For example, I've found code which uses AI for Speach-to-text and text-to-speach but in theory I cant use it as it hasn't been through the AI policy, even though its open souces and provided by openai. 
+

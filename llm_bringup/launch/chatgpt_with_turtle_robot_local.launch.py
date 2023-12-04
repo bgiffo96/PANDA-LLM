@@ -35,12 +35,12 @@ from launch.substitutions import LaunchConfiguration
 def generate_launch_description():
     return LaunchDescription(
         [
-            Node(
-                package="llm_input",
-                executable="llm_audio_input_local",
-                name="llm_audio_input_local",
-                output="screen",
-            ),
+            #Node(
+            #    package="llm_input",
+            #    executable="llm_audio_input_local",
+            #    name="llm_audio_input_local",
+            #    output="screen",
+            #),
             Node(
                 package="llm_model",
                 executable="chatgpt",
